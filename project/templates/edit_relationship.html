@@ -1,0 +1,200 @@
+{% extends "layout.html" %}
+
+{% block main %}
+<div class="page-content">
+
+  <div class="auth-logo-top-left">
+    <img
+      src="{{ url_for('static', filename='logo.png') }}"
+      alt="Family Forest"
+    >
+  </div>
+  
+  <div class="custom-wrapper-lg">
+    <div class="custom-card">
+
+    {% if relationship %}
+    <!-- ================= EDIT RELATIONSHIP ================= -->
+    <form action="/edit-relationship/{{ relationship.id }}" method="post" class="custom-form">
+
+      <a href="/" class="home-btn">← Forest</a>
+
+      <h2 class="custom-title mb-4 text-center">
+        Branches can grow, flower and even break
+      </h2>
+
+      <div class="row g-4 mb-4">
+        <div class="col-12">
+          <label class="form-label">Relationship type</label>
+          <select
+            class="form-select form-select-lg custom-select"
+            name="relationship_type"
+            required
+          >
+            {% for t in ["spouse", "parent", "friend", "ex-spouse", "pet"] %}
+              <option value="{{ t }}" {{ "selected" if t == relationship.relationship_type }}>
+                {{ t }}
+              </option>
+            {% endfor %}
+          </select>
+        </div>
+      </div>
+
+      <div class="row g-4 mb-3">
+        <div class="col-md-6">
+          <label class="form-label">Person A</label>
+          <div class="form-control form-control-lg">
+            {{ relationship.person_a_name }}
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <label class="form-label">Person B</label>
+          <div class="form-control form-control-lg">
+            {{ relationship.person_b_name }}
+          </div>
+        </div>
+      </div>
+
+      {% if error %}
+      <div class="alert custom-alert mb-4">{{ error }}</div>
+      {% endif %}
+
+      <div class="row">
+        <div class="col">
+          <button class="btn btn-primary btn-lg w-100" name="action" value="save">
+            Save edits
+          </button>
+        </div>
+        <div class="col-3">
+          <button class="btn btn-danger btn-lg w-100" name="action" value="delete">
+            Delete
+          </button>
+        </div>
+      </div>
+
+    </form>
+
+    {% else %}
+    <!-- ================= SELECT RELATIONSHIP ================= -->
+    <form action="/edit-relationship/" method="post" class="custom-form">
+
+      <a href="/" class="home-btn">← Forest</a>
+
+      <h2 class="custom-title mb-4 text-center">
+        Which branch do you want to edit?
+      </h2>
+
+      <!-- Filters -->
+      <div class="row g-3 mb-3">
+        <div class="col-md-4">
+          <input id="filterA" class="form-control form-control-lg"
+                 placeholder="Filter by Person A">
+        </div>
+
+        <div class="col-md-4">
+          <input id="filterB" class="form-control form-control-lg"
+                 placeholder="Filter by Person B">
+        </div>
+
+        <div class="col-md-4">
+          <select id="filterType" class="form-select form-select-lg">
+            <option value="">All types</option>
+            <option>spouse</option>
+            <option>parent</option>
+            <option>friend</option>
+            <option>ex-spouse</option>
+            <option>pet</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Relationship select -->
+      <select
+        class="form-select form-select-lg custom-select mb-4"
+        name="relationship_id"
+        id="relationshipSelect"
+        required
+      >
+        <option value="" disabled selected>Select a relationship</option>
+      </select>
+
+      {% if error %}
+      <div class="alert custom-alert mb-4">{{ error }}</div>
+      {% endif %}
+
+      <button class="btn btn-primary btn-lg w-100">
+        Edit relationship
+      </button>
+
+    </form>
+    {% endif %}
+
+    </div>
+  </div>
+</div>
+
+<!-- ================= FILTER SCRIPT ================= -->
+<script>
+(() => {
+  const filterA = document.getElementById("filterA");
+  const filterB = document.getElementById("filterB");
+  const filterType = document.getElementById("filterType");
+  const select = document.getElementById("relationshipSelect");
+
+  if (!select) return;
+
+  // Cache relationships safely
+  const relationships = [
+    {% for r in relationships %}
+    {
+      id: "{{ r.id }}",
+      a: "{{ r.person_a_name|lower }}",
+      b: "{{ r.person_b_name|lower }}",
+      type: "{{ r.relationship_type }}",
+      label: "{{ r.person_a_name }} — {{ r.relationship_type }} — {{ r.person_b_name }}"
+    },
+    {% endfor %}
+  ];
+
+  function rebuildSelect(filtered) {
+    const placeholder = select.value;
+
+    select.innerHTML =
+      '<option value="" disabled>Select a relationship</option>';
+
+    for (const r of filtered) {
+      const opt = document.createElement("option");
+      opt.value = r.id;
+      opt.textContent = r.label;
+      select.appendChild(opt);
+    }
+
+    // Reset invalid selection
+    select.value = "";
+  }
+
+  function applyFilters() {
+    const a = filterA.value.trim().toLowerCase();
+    const b = filterB.value.trim().toLowerCase();
+    const type = filterType.value;
+
+    const filtered = relationships.filter(r =>
+      (!a || r.a.includes(a)) &&
+      (!b || r.b.includes(b)) &&
+      (!type || r.type === type)
+    );
+
+    rebuildSelect(filtered);
+  }
+
+  filterA.addEventListener("input", applyFilters);
+  filterB.addEventListener("input", applyFilters);
+  filterType.addEventListener("change", applyFilters);
+
+  // Initial load
+  rebuildSelect(relationships);
+})();
+</script>
+
+{% endblock %}

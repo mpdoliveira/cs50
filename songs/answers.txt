@@ -1,0 +1,19 @@
+QUESTION 1:
+Using the following SQL command:
+SELECT AVG(energy), AVG(valence), AVG(danceability) FROM songs;
+We get the averages 0.65906, 0.484443 and 0.71646 for energy, valence and danceability respectively.
+
+Let's analyse this data:
+- 0.65906 of energy means this person enjoys songs that are generally more energetic.
+- 0.484443 of valence represents songs that are slightly more "negative", such as sad or angry songs.
+- 0.71646 of danceability indicates that this person likes songs suitable for dancing.
+
+Based on the info gathered, I'd say this person has an "Audio Aura" that is:
+- VIBRANT, to indicate the energy.
+- INTROSPECTIVE, to indicate a neutral shy-ish character.
+- RHYTHMIC, to indicate the dance-oriented songs.
+
+QUESTION 2:
+A possible problem here is that we don't factor in the number of times this person has listened to these songs.
+It could be the case that our client heard his top 10 songs for 60% of his playing time against 40% for the other 90 songs.
+A way to fix this would be to have a wighted average instead

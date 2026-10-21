@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    quote
+{% endblock %}
+
+{% block main %}
+    <form action="/quote" method="post">
+        <div class="mb-3">
+            <input autofocus class="form-control mx-auto w-auto" name="symbol">
+        </div>
+        <button class="btn btn-primary" type="submit">Look up</button>
+    </form>
+    <table class="table mx-auto w-auto">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Symbol</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if quoted %}
+                {% for q in quoted %}
+                    <tr>
+                        <td>{{ q.name }}</td>
+                        <td>{{ q.price }}</td>
+                        <td>{{ q.symbol }}</td>
+                    </tr>
+                {% endfor %}
+            {% endif %}
+        </tbody>
+    </table>
+
+{% endblock %}

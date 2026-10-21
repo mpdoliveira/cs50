@@ -1,0 +1,31 @@
+>>> HTMLL tags:
+<div>
+<hearder>
+<a>
+<ul>
+<img>
+<h6>
+<i>
+<table>
+<thead>
+<tbody>
+<tr>
+<td>
+...
+
+>>> CSS properties:
+color
+text-decoration
+max-height
+max-width
+wigth
+margin
+object-fit
+justify-content
+...
+
+>>> JavaScript
+I used JavaScript to automatically highlight the active tags using color and a dot decoration.
+
+>>> Bootstrap
+I used bootstrap to format nearly everything. From basic text to the calendar, netflix-row (combination of bootstrap and personalization) and much more.

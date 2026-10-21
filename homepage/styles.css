@@ -1,0 +1,58 @@
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  color: #4a2e1a;
+}
+
+header {
+    background-color: #FFF8F8;
+    flex-direction: column;
+    align-items: center;
+}
+
+.nav {
+  justify-content: center;
+  text-align: center;
+}
+
+.nav-link.active {
+    color: #492D19;
+}
+
+.nav-link {
+    color: #8D6F7D;
+}
+
+.nav-link:hover {
+    color: #6B4F3B;
+    text-decoration: underline;
+}
+
+.carousel-item img {
+  max-height: 500px;
+  max-width: 800px;
+  width: auto;
+  margin: 0 auto;
+  object-fit: cover;
+}
+
+.netflix-row {
+  scroll-snap-type: x mandatory;
+}
+
+.netflix-row img {
+  flex-shrink: 0;
+  scroll-snap-align: start;
+  object-fit: cover;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.netflix-row img:hover {
+  transform: scale(1.02);
+}

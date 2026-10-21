@@ -1,0 +1,73 @@
+{% extends "layout.html" %}
+
+{% block main %}
+<div class="page-content">
+
+  <div class="auth-logo-top-left">
+    <img
+      src="{{ url_for('static', filename='logo.png') }}"
+      alt="Family Forest"
+    >
+  </div>
+
+  <div class="custom-wrapper">
+
+    <!-- Login card -->
+    <div class="custom-card">
+      <form action="/login" method="post" class="custom-form">
+
+        <h2 class="custom-title mb-4 text-center">Welcome back</h2>
+
+        <div class="mb-3">
+          <label for="username" class="form-label">Username</label>
+          <input
+            autofocus
+            autocomplete="off"
+            class="form-control form-control-lg"
+            id="username"
+            name="username"
+            required
+            type="text"
+          >
+        </div>
+
+        <div class="mb-3">
+          <label for="Password" class="form-label">Password</label>
+          <input
+            autocomplete="off"
+            class="form-control form-control-lg"
+            id="Password"
+            name="password"
+            required
+            type="password"
+          >
+        </div>
+
+        {% if error %}
+        <div class="alert custom-alert mb-3" role="alert">
+          {{ error }}
+        </div>
+        {% endif %}
+
+        <div class="d-grid">
+          <button type="submit" class="btn btn-primary btn-lg">
+            Log in
+          </button>
+        </div>
+
+      </form>
+    </div>
+
+    <!-- Register card -->
+    <div class="custom-card custom-card-sm text-center mt-4">
+      <span class="text-muted">Are you new here?</span>
+      <div class="mt-2">
+        <a href="/register" class="btn btn-outline-primary">
+          Create an account
+        </a>
+      </div>
+    </div>
+
+  </div>
+</div>
+{% endblock %}

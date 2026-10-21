@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+        <link href="styles.css" rel="stylesheet">
+        <title>Trivia!</title>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const options = document.querySelectorAll('.option')
+                options.forEach(option => {
+                    option.addEventListener('click', function() {
+                        options.forEach(op => {
+                            op.style.backgroundColor = '';
+                        })
+                        if (option.textContent == 'Portuguese') {
+                            option.style.backgroundColor = 'green';
+                            document.querySelector('#check1').textContent = 'Correct!';
+                        } else {
+                            option.style.backgroundColor = 'red';
+                            document.querySelector('#check1').textContent = 'Inorrect.';
+                        }
+                    })
+                })
+
+                document.querySelector('.confirm').addEventListener('click', function() {
+                    const answer_field = document.querySelector('input')
+                    let answer = answer_field.value.trim().toLowerCase();
+                    if (answer== 'brasilia' || answer == 'brasília') {
+                        answer_field.style.backgroundColor = 'green';
+                        document.querySelector('#check1').textContent = 'Correct!';
+                    } else {
+                        answer_field.style.backgroundColor = 'red';
+                        document.querySelector('#check1').textContent = 'Incorrect.';
+                    }
+                })
+            });
+
+        </script>
+    </head>
+    <body>
+        <div class="header">
+            <h1>Trivia!</h1>
+        </div>
+
+        <div class="container">
+            <div class="section">
+                <h2>Part 1: Multiple Choice </h2>
+                <h3>What language is spoken in Brazil?<h3></h3>
+                <p id="check1"></p>
+                <button class="option" type="button">Spanish</button>
+                <button class="option" type="button">Brazilian</button>
+                <button class="option" type="button">Portuguese</button>
+                <button class="option" type="button">Italian</button>
+            </div>
+
+            <div class="section">
+                <h2>Part 2: Free Response</h2>
+                <h3>What is the capital of Brazil?</h3>
+                <p id="check2"></p>
+                <input autocomplete="off" id="answer2" placeholder="answer" type="text">
+                <button class="confirm" type="button">Confirm</button>
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,61 @@
+{% extends "layout.html" %}
+
+{% block main %}
+<div class="page-content">
+  <div class="auth-logo-top-left">
+    <img
+      src="{{ url_for('static', filename='logo.png') }}"
+      alt="Family Forest"
+    >
+  </div>
+  
+  <div class="custom-wrapper-lg">
+
+    <div class="custom-card">
+      <form class="custom-form">
+
+        <a href="/" class="home-btn">
+            ← Forest
+        </a>
+
+        <h2 class="custom-title mb-4 text-center">
+          This leaf's story
+        </h2>
+
+        <!-- Row 1 -->
+        <div class="row g-4 mb-3">
+            <div class="col-md-8">
+                <label for="name" class="form-label">Name</label>
+                <input class="form-control form-control-lg" readonly value="{{person.name}}">
+            </div>
+
+            <div class="col-md-4">
+                <label for="birthdate" class="form-label">Birth date</label>
+                <input class="form-control form-control-lg" readonly value="{{person.birth_date}}">
+            </div>
+        </div>
+
+        <!-- Row 2 -->
+        <div class="row g-4 mb-4">
+          <div class="col-12">
+            <label for="notes" class="form-label">Notes</label>
+            <textarea
+            class="form-control form-control-lg"
+            rows="4"
+            readonly
+            >{{person.notes}}</textarea>
+          </div>
+        </div>
+        <div class="d-grid">
+          <a class="btn btn-primary btn-lg" href="/edit-person/{{person.id}}">
+            Edit person
+          </a>
+        </div>
+
+      </form>
+    </div>
+
+  </div>
+</div>
+
+{% endblock %}

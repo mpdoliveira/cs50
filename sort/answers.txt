@@ -1,0 +1,11 @@
+sort1 uses: Bubble Sort
+
+How do you know?: sort1 had bad results with random numbers and great with sorted numbers
+
+sort2 uses: Merge Sort
+
+How do you know?: sort2 was consistantly fast with all .txt
+
+sort3 uses: Selection Sort
+
+How do you know?: sort3 was not the fastest, but was consistant regardless of the .txt

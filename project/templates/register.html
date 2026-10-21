@@ -1,0 +1,95 @@
+{% extends "layout.html" %}
+
+{% block main %}
+<div class="page-content">
+
+  <div class="auth-logo-top-left">
+    <img
+      src="{{ url_for('static', filename='logo.png') }}"
+      alt="Family Forest"
+    >
+  </div>
+
+  <div class="custom-wrapper">
+    <div class="custom-card custom-card-sm">
+      <form action="/register" method="post" class="custom-form">
+
+        <h2 class="custom-title mb-4 text-center">Welcome back</h2>
+
+        <div class="mb-2">
+          <label for="username" class="form-label">Username</label>
+          <input
+            autofocus
+            autocomplete="off"
+            class="form-control form-control-lg"
+            id="username"
+            name="username"
+            required
+            type="text"
+          >
+        </div>
+
+        <div class="mb-2">
+          <label for="name" class="form-label">Name</label>
+          <input
+            autocomplete="off"
+            class="form-control form-control-lg"
+            id="name"
+            name="name"
+            required
+            type="name"
+          >
+        </div>
+
+        <div class="mb-2">
+          <label for="Password" class="form-label">Password</label>
+          <input
+            autocomplete="off"
+            class="form-control form-control-lg"
+            id="Password"
+            name="password"
+            required
+            type="password"
+          >
+        </div>
+
+        <div class="mb-3">
+          <label for="confirmation" class="form-label">Confirm password</label>
+          <input
+            autocomplete="off"
+            class="form-control form-control-lg"
+            id="confirmation"
+            name="confirmation"
+            required
+            type="password"
+          >
+        </div>
+
+        {% if error %}
+        <div class="alert custom-alert mb-2" role="alert">
+          {{ error }}
+        </div>
+        {% endif %}
+
+        <div class="d-grid">
+          <button type="submit" class="btn btn-primary btn-lg">
+            Register
+          </button>
+        </div>
+
+      </form>
+    </div>
+
+    <!-- Login card -->
+    <div class="custom-card custom-card-sm text-center mt-4">
+      <span class="text-muted">Have you been here before?</span>
+      <div class="mt-2">
+        <a href="/login" class="btn btn-outline-primary">
+          Log in to your acount
+        </a>
+      </div>
+    </div>
+
+  </div>
+</div>
+{% endblock %}

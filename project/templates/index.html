@@ -1,0 +1,51 @@
+{% extends "layout.html" %}
+
+{% block main %}
+
+    <div class="app-canvas">
+        <div class="d-flex gap-3 mb-3 graph-actions">
+            <img
+            src="{{ url_for('static', filename='logo.png') }}"
+            alt="Family Forest"
+            class="graph-logo"
+            >
+            <a href="/add-person" class="btn btn-primary">Add person</a>
+            <a href="/add-relationship" class="btn btn-primary">Add relationship</a>
+            <a href="/edit-person" class="btn btn-primary">Edit person</a>
+            <a href="/edit-relationship" class="btn btn-primary">Edit relationship</a>
+        </div>
+
+        <a href="/logout" class="logout-btn">
+            Logout
+        </a>
+
+
+
+        <div id="family-graph" style="width: 100%; height: 100%;"></div>
+        <div id="person-card" class="person-card hidden">
+            <div class="card-header">
+                <span id="card-name"></span>
+                <button id="card-close">×</button>
+            </div>
+
+            <div class="card-item">
+                <strong>Birthdate:</strong>
+                <span id="card-birthdate"></span>
+            </div>
+
+            <div class="card-item">
+                <strong>Notes:</strong>
+                <div id="card-notes"></div>
+            </div>
+        </div>
+
+
+  <div id="card-body"></div>
+</div>
+
+
+    </div>
+
+    <script src="/static/graph.js"></script>
+
+{% endblock %}
